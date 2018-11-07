@@ -34,6 +34,6 @@ ssh someinternalhost
 
 Данные бастиона
 ```
-bastion_IP = 35.228.69.68 
-someinternalhost_IP = 10.166.0.3
+bastion_IP=35.228.69.68 
+someinternalhost_IP=10.166.0.3
 ```
