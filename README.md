@@ -1,3 +1,6 @@
+bastion_IP = 35.228.69.68
+someinternalhost_IP = 10.166.0.3
+
 # rainman17_infra
 rainman17 Infra repository
 
@@ -32,4 +35,7 @@ ProxyCommand ssh -q bastion nc -q0 10.166.0.3 22 # здесь меняем то�
 ```
 ssh someinternalhost
 ```
+
+
+
 
