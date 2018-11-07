@@ -5,7 +5,7 @@ someinternalhost_IP = 10.166.0.3
 rainman17 Infra repository
 
 [HW-3]
-bastion_IP = 35.228.69.68 someinternalhost_IP = 10.166.0.3
+
 >Исследовать способ подключения к someinternalhost в одну
 >команду из вашего рабочего устройства, проверить
 >работоспособность найденного решения и внести его в
