@@ -8,6 +8,89 @@ testapp_port = 9292
 # rainman17_infra
 rainman17 Infra repository
 
+[packer-base]
+
+Установка Packer:
+```
+$ wget https://releases.hashicorp.com/packer/1.3.1/packer_1.3.1_linux_amd64.zip 
+$ unzip packer_1.3.1_linux_amd64.zip
+$ sudo mv packer /usr/local/bin/
+$ packer -v 
+```
+Создание Application Default Credentials: 
+```
+$ gcloud auth application-default login
+
+```
+
+Создаем шаблон для packer: ubuntu16.json
+```
+{
+    "builders": [
+        {
+            "type": "googlecompute",
+            "project_id": "infra-219820",
+            "image_name": "reddit-base-{{timestamp}}",
+            "image_family": "reddit-base",
+            "source_image_family": "ubuntu-1604-lts",
+            "zone": "europe-west1-b",
+            "ssh_username": "eav",
+            "machine_type": "f1-micro"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/install_ruby.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install_mongodb.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
+
+```
+
+Проверка валидности шаблона packer:
+```
+$ packer validate ubuntu16.json 
+```
+
+Сборка образа
+```
+$ packer build ubuntu16.json
+```
+
+Создаем виртуалку из образа и запускаем приложение
+```
+$ git clone -b monolith https://github.com/express42/reddit.git
+$ cd reddit && bundle install  
+$ puma -d 
+
+```
+
+Запуск сборки с файлом переменных
+```
+$ packer build -var-file=variables.json ubuntu16.json
+
+```
+
+Запуск виртуальной машины из консоли
+```
+gcloud compute instances create reddit-app\
+  --boot-disk-size=12GB \
+  --image-family=reddit-full \
+  --machine-type=g1-small \
+  --tags puma-server \
+  --restart-on-failure
+
+```
+
+
+
 [HW-3]
 
 >Исследовать способ подключения к someinternalhost в одну
