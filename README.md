@@ -1,6 +1,10 @@
 bastion_IP = 35.228.69.68
 someinternalhost_IP = 10.166.0.3
 
+testapp_IP = 35.228.161.64 
+testapp_port = 9292 
+
+
 # rainman17_infra
 rainman17 Infra repository
 
