@@ -1,5 +1,6 @@
 variable public_key_path {
 	description = "Path to the public key used to connect to instance"
+	default = "/root/.ssh/root.pub"
 }
 variable zone {
 	description = "Zone"
