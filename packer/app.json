@@ -1,0 +1,24 @@
+{
+    "builders": [
+        {
+            "type": "googlecompute",
+            "project_id": "infra-221214",
+            "image_name": "reddit-app-base-{{timestamp}}",
+            "image_family": "reddit-app-base",
+            "source_image_family": "ubuntu-1604-lts",
+            "zone": "europe-north1-a",
+            "disk_size": "10",
+            "disk_type": "pd-standard",
+            "ssh_username": "appuser",
+            "network": "default",
+            "machine_type": "f1-micro"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/install_ruby.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
